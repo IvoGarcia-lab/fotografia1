@@ -8,13 +8,13 @@ import PortfolioPage from "./pages/PortfolioPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import PhotoDetailPage from "./pages/PhotoDetailPage";
-import { ThemeProvider } from "@/components/theme-provider"; // Import ThemeProvider
+import { ThemeProvider } from "@/components/theme-provider";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme"> {/* Adicionando ThemeProvider */}
+    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme" attribute="class">
       <TooltipProvider>
         <Toaster />
         <Sonner />
