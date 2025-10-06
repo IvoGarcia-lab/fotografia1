@@ -1,6 +1,14 @@
+import React from "react"; // Re-adicionando importação de React para useState e useMemo
 import Layout from "@/components/layout/Layout";
 import Gallery from "@/components/Gallery";
 import { useNavigate } from "react-router-dom";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"; // Importando componentes Select
 
 // Dados de exemplo para as fotos
 const samplePhotos = [
@@ -78,6 +86,19 @@ const samplePhotos = [
 
 const PortfolioPage = () => {
   const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = React.useState<string>("all");
+
+  const categories = React.useMemo(() => {
+    const uniqueCategories = new Set(samplePhotos.map((photo) => photo.category));
+    return ["all", ...Array.from(uniqueCategories)];
+  }, []);
+
+  const filteredPhotos = React.useMemo(() => {
+    if (selectedCategory === "all") {
+      return samplePhotos;
+    }
+    return samplePhotos.filter((photo) => photo.category === selectedCategory);
+  }, [selectedCategory]);
 
   const handleViewDetails = (id: string) => {
     navigate(`/photo/${id}`);
@@ -86,7 +107,22 @@ const PortfolioPage = () => {
   return (
     <Layout>
       <h1 className="text-4xl font-bold text-center mb-8">Minha Galeria de Fotografias</h1>
-      <Gallery photos={samplePhotos} onViewDetails={handleViewDetails} />
+      <div className="flex justify-center mb-8">
+        <Select onValueChange={setSelectedCategory} defaultValue="all">
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Filtrar por Categoria" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Todas as Categorias</SelectItem>
+            {categories.filter(cat => cat !== "all").map((category) => (
+              <SelectItem key={category} value={category}>
+                {category}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <Gallery photos={filteredPhotos} onViewDetails={handleViewDetails} />
     </Layout>
   );
 };

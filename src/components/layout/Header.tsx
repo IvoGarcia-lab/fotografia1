@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ThemeToggle"; // Importando o novo componente
 
 const Header = () => {
   return (
@@ -18,6 +19,7 @@ const Header = () => {
           <Button variant="ghost" asChild>
             <Link to="/contact">Contato</Link>
           </Button>
+          <ThemeToggle /> {/* Adicionando o alternador de tema aqui */}
         </nav>
       </div>
     </header>
