@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Layout from "@/components/layout/Layout";
 import Gallery from "@/components/Gallery";
 import { useNavigate } from "react-router-dom";
@@ -12,12 +12,12 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 
-// Definindo a interface para o tipo de foto
+// Definindo a interface para o tipo de foto para corresponder ao componente Gallery
 interface Photo {
   id: string;
   title: string;
   description: string;
-  image_url: string;
+  imageUrl: string;
   category: string;
 }
 

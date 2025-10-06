@@ -43,9 +43,14 @@ const Header = () => {
             <Link to="/contact">Contato</Link>
           </Button>
           {session ? (
-            <Button variant="ghost" onClick={handleLogout}>
-              Sair
-            </Button>
+            <>
+              <Button variant="ghost" asChild>
+                <Link to="/admin">Admin</Link>
+              </Button>
+              <Button variant="ghost" onClick={handleLogout}>
+                Sair
+              </Button>
+            </>
           ) : (
             <Button variant="ghost" asChild>
               <Link to="/login">Login</Link>

@@ -10,6 +10,8 @@ import ContactPage from "./pages/ContactPage";
 import PhotoDetailPage from "./pages/PhotoDetailPage";
 import { ThemeProvider } from "@/components/theme-provider";
 import LoginPage from "./pages/LoginPage";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,12 @@ const App = () => (
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/photo/:id" element={<PhotoDetailPage />} />
             <Route path="/login" element={<LoginPage />} />
+            
+            {/* Rotas Protegidas */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/admin" element={<AdminDashboardPage />} />
+            </Route>
+
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

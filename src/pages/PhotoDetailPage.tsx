@@ -30,15 +30,20 @@ const PhotoDetailPage = () => {
       setLoading(true);
       const { data, error } = await supabase
         .from("photos")
-        .select("*, image_url as imageUrl, photo_date as date")
+        .select("*, image_url, photo_date")
         .eq("id", id)
         .single();
 
       if (error) {
         console.error("Error fetching photo details:", error);
         setPhoto(null);
-      } else {
-        setPhoto(data);
+      } else if (data) {
+        const formattedData: PhotoDetails = {
+          ...data,
+          imageUrl: data.image_url,
+          date: data.photo_date,
+        };
+        setPhoto(formattedData);
       }
       setLoading(false);
     };
